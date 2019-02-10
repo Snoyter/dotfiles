@@ -1,5 +1,0 @@
-sudo pacman -S terminus-font
-exec compton -f --vsync drm
-pacman -S alsa-lib alsa-utils alsa-oss 
-amixer sset Master unmute
-alsamixer
