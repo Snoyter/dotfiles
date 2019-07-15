@@ -1,0 +1,31 @@
+/* tabs */
+#TabsToolbar { visibility: collapse; }
+
+/* back & forward */
+#main-window :-moz-any(#back-button, #forward-button) {
+  display: none !important;
+}
+
+/* searchbar border*/
+#urlbar, .searchbar-textbox {
+        border: none !important;
+        box-shadow:none !important;
+}
+
+
+#identity-icon-labels
+{
+    display: none !important;
+}
+
+/* Hide White Header Tab Tree */
+#sidebar-header {
+ display: none;
+}
+
+#urlbar[pageproxystate="valid"] > #identity-box.verifiedDomain > #connection-icon,
+#urlbar[pageproxystate="valid"] > #identity-box.verifiedIdentity > #connection-icon,
+#urlbar[pageproxystate="valid"] > #identity-box.mixedActiveBlocked > #connection-icon {
+  display: none !important;
+}
+
