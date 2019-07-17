@@ -1,0 +1,5 @@
+[user]
+	name = Snoyter
+	email = snoyter@mail.ru
+[core]
+	editor = nvim
