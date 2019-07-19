@@ -1,7 +1,7 @@
 #!/bin/sh
 
 export EDITOR="nvim"
-export TERMINAL="termite"
+export TERMINAL="st"
 export READER="zathura"
 export TRUEBROWSER="firefox"
 
