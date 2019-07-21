@@ -4,6 +4,7 @@ dialog
 wpa_supplicant
 iw
 sudo
+archlinux-keyring
 ranger
 i3
 xorg
@@ -13,11 +14,9 @@ xterm
 xorg-xclock
 neovim
 git
-pkg-config
 firefox
 pulseaudio
 xbacklight
-pulse
 pakku
 vim-plug
 xcb
@@ -28,7 +27,3 @@ betterlockscreen
 unclutter
 scrot
 mplayer
-arc-gtk-theme
-
-must:
-xf86-synaptic
