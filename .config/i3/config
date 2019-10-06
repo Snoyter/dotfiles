@@ -1,28 +1,24 @@
 set $mod Mod4
 font pango:Hack 10
 floating_modifier $mod
-
 focus_follows_mouse no
 
-set $darkblue #003366
-set $rose #FFE4E1
+set $rose #5294e2 
 set $lightgrey #C0C0C0
-set $darkgrey #666666
-set $black #000000
-set $lightblue #56719E
-set $grey #CCCCCC
-set $greenlain #4cbb17
+set $darkgrey #383c4a
+set $green #4cbb17
+set $blue #5294e2
 
 #class                  border      backgr.     text       split
-client.focused          $greenlain  $greenlain $rose       $black
+client.focused          $blue       $blue      $darkgrey   $green
 client.focused_inactive $darkgrey   $darkgrey  $lightgrey  $darkgrey
 client.unfocused        $darkgrey   $darkgrey  $lightgrey  $darkgrey
-client.urgent           $darkgrey   $darkgrey  $lightgrey  $black
+client.urgent           $darkgrey   $darkgrey  $lightgrey  $green
 client.background       $darkgrey 
 
-bindsym $mod+Return exec termite 
+bindsym $mod+d exec dmenu_run
+bindsym $mod+Return exec st
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec --no-startup-id rofi -show drun
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -37,9 +33,9 @@ bindsym $mod+Shift+l move right
 bindsym $mod+c split h
 bindsym $mod+v split v
 
-bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
+bindsym $mod+s layout stacking
 
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
@@ -74,30 +70,25 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+s exec poweroff
+bindsym $mod+Shift+y restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym $mod+r mode "resize"
+bindsym Shift+$mod+r mode "resize"
+bindsym Shift+$mod+f fullscreen
 
 mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
-        bindsym l resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym j resize shrink height 10 px or 10 ppt
-        bindsym h resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
         bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
 }
 
-
 bar {
-  mode dock
   position top
-  status_command conky -c ~/.conkyrc
+  status_command conky -c ~/.config/conky/.conkyrc
 
   colors  {
     background $darkgrey 
@@ -108,41 +99,27 @@ bar {
     active_workspace   $darkgrey  $darkgrey $lightgrey
     inactive_workspace $darkgrey  $darkgrey $lightgrey
     urgent_workspace   $darkgrey  $darkgrey $lightgrey
-}
+  }
 }
 
-exec_always --no-startup-id compton -bCG --vsync --experimental-backends
-exec_always --no-startup-id feh --bg-scale ~/00_Pictures/01_Wallpaper/00_WallpaperLain.jpg
-#exec_always --no-startup-id feh --bg-scale ~/00_Pictures/01_Wallpaper/01_SamuraiChamploo/01_WallpaperSamurai.jpg
-exec setxkbmap -model pc105 -layout us,ru -variant qwerty -option grp:alt_shift_toggle
-exec_always --no-startup-id xautolock -time 1 -locker betterlockscreen -l
-exec termite
+exec feh --bg-scale ~/Picture/cyber.jpg
+exec unclutter -idle 5
+exec xidlehook --not-when-fullscreen --not-when-audio --timer normal 180 'betterlockscreen -l' ''
+exec compton --vsync --experimental-backends
 
-bindsym Shift+$mod+f fullscreen
 bindsym XF86AudioRaiseVolume exec amixer set Master 5+
 bindsym XF86AudioLowerVolume exec amixer set Master 5-
-bindsym XF86AudioMute exec amixer -q set Master toggle
-
 bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5
 
-bindsym Shift+XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 1
-bindsym Shift+XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 1
-
-bindsym F6 exec unclutter -idle 0; exec xinput --disable 9
-bindsym Shift+F6 exec xinput --enable 9
-
-bindsym $mod+Shift+s exec poweroff
-bindsym $mod+m exec scrot
-
-bindsym $mod+f exec firefox
+bindsym $mod+r exec st -e ranger
 bindsym $mod+i exec idea
-bindsym $mod+n exec vim
+bindsym $mod+g exec steam-runtime
+bindsym $mod+m exec scrot
+bindsym Shift+$mod+m exec "scrot --select"
+bindsym $mod+f exec firefox
 bindsym $mod+a exec betterlockscreen -l
+bindsym $mod+n exec st -e nvim
 
-#assign [class="idea"] $ws3
-
-gaps inner 9
-smart_gaps on
-smart_borders on
+hide_edge_borders smart
 default_border pixel 3
