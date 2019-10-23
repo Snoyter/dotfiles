@@ -102,6 +102,7 @@ bar {
   }
 }
 
+exec betterlockscreen -l
 exec feh --bg-scale ~/Picture/cyber.jpg
 exec unclutter -idle 5
 exec xidlehook --not-when-fullscreen --not-when-audio --timer normal 180 'betterlockscreen -l' ''
@@ -123,3 +124,12 @@ bindsym $mod+n exec st -e nvim
 
 hide_edge_borders smart
 default_border pixel 3
+
+for_window [class="Login_Register_Design-Login_Form"] floating enable
+assign [class="st"] $ws1
+assign [class="firefox"] $ws2
+assign [class="gimp"] $ws3
+assign [class="dota2"] $ws3
+assign [class="Steam"] $ws3
+assign [class="obs"] $ws3
+assign [class="transmission"] $ws3
