@@ -1,7 +1,7 @@
-dialog - for wifi-menu
+netctl, dialog - for wifi-menu
 wpa_supplicant - for wpa connection
 sudo - for install programm not under root
-archlinux-keyring 
+archlinux-keyring - gpg keys 
 ranger - file manager
 i3 - window manager
 xorg - display server
