@@ -1,12 +1,12 @@
-#!/bin/sh
+#!/bin/bash
+[[ -f ~/.bashrc ]] && source ~/.bashrc
 
 export EDITOR="nvim"
 export TERMINAL="st"
+export BROWSER="firefox"
 export READER="zathura"
-export TRUEBROWSER="firefox"
+export FILE="ranger"
 
-[ -f ~/.bashrc ] && source ~/.bashrc
-
-if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+if [[ "$(tty)" = "/dev/tty1" ]]; then
   exec startx
 fi

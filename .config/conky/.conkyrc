@@ -9,7 +9,7 @@ draw_graph_borders yes
 draw_outline no
 draw_shades no
 use_xft yes
-xftfont DejaVu Sans Mono:size=20
+xftfont Hack 10
 gap_x 25
 gap_y 25
 minimum_size 5 5
@@ -36,28 +36,13 @@ color0 7d7d7d
 color1 slategrey
 color2 ffffff
 
-# (${downspeedf wlp1s0}k/s) 
-# Wifi: ${if_up wlp1s0}up | ${endif}\
-# Uptime: $uptime | \
-# Root: {fs_used /}/${fs_size /} /home ${fs_free /home} /${fs_size /home}
-# Load: ${loadavg 1} ${loadavg 2} ${loadavg 3} 
-# Load: $loadavg
-# Swap: ${swap}/${swapmax} (${swapperc}%)
-# Processes: ${running_processes} / ${processes}
-# CPU: $cpu% 
-# HDD: $diskio_read :Read $diskio_write :Write
-# Temp: Core0: ${exec sensors | awk '/Core 0/ {print $3}'} Core1: ${exec sensors | awk '/Core 1/ {print $3}'}
-# Freq: ${freq cpu0}Mhz
-# Kernel:$kernel on $machine
-# Name: $nodename - $sysname
-
 TEXT
-
 ${exec skb 1} | \
 CPU: ${cpu cpu1}% | \
 RAM: ${memperc}% | \
-WLAN: ${wireless_link_qual wlp1s0}% | \
-Vol: ${exec amixer get Master -M | grep -oE -m1 "[[:digit:]]*%"} | \
-Battery: ${battery_percent BAT0}% | \
+WLAN: ${wireless_link_qual wlan0}% | \
+DISK: ${fs_free /} | \
+BRIGH: ${exec xbacklight | cut -d '.' -f 1} | \
+VOL: ${exec amixer get Master -M | grep -oE -m1 "[[:digit:]]*%"} | \
+BAT: ${battery_percent BAT0}% | \
 ${time %a %d.%m.%y} ${time %H:%M} \
-

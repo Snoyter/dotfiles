@@ -1,7 +1,14 @@
-set $mod Mod4
+# >> Initialization
+
 font pango:Hack 10
-floating_modifier $mod
+floating_modifier Mod4
 focus_follows_mouse no
+hide_edge_borders smart
+default_border pixel 3
+
+set $super bindsym Mod4
+set $exe exec --no-startup-id 
+set $fyra exec --no-startup-id i3fyra 
 
 set $rose #5294e2 
 set $lightgrey #C0C0C0
@@ -9,36 +16,54 @@ set $darkgrey #383c4a
 set $green #4cbb17
 set $blue #5294e2
 
-#class                  border      backgr.     text       split
-client.focused          $blue       $blue      $darkgrey   $green
-client.focused_inactive $darkgrey   $darkgrey  $lightgrey  $darkgrey
-client.unfocused        $darkgrey   $darkgrey  $lightgrey  $darkgrey
-client.urgent           $darkgrey   $darkgrey  $lightgrey  $green
-client.background       $darkgrey 
+# >> Panic
 
-bindsym $mod+d exec dmenu_run
-bindsym $mod+Return exec st
-bindsym $mod+Shift+q kill
+$super+Shift+q kill
+$super+Shift+s exec poweroff
+$super+Shift+r restart
+$super+Shift+e exec --no-startup-id \
+  "i3-nagbar -t warning -m 'You pressed the exit\
+ shortcut. Do you really want to exit i3? This\
+ will end your X session.' -b 'Yes, exit i3'\
+  'i3-msg exit'"
 
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+# >> Program laungching 
 
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+$super+Return exec st
+$super+g exec steam
+$super+f exec firefox
+$super+Shift+f exec firefox --private-window
+$super+i exec idea
+$super+d exec rofi -show drun
+$super+Shift+d exec dmenu_run
+$super+a exec betterlockscreen -l dimblur
+$super+m exec maim -u ~/Pictures/Screenshots/$(date +"%d-%m-%Y|%H:%M:%S").png && dunstify "Fullscreen screenshot saved"
+$super+Shift+m exec maim -s -u ~/Pictures/Screenshots/$(date +"%d-%m-%Y|%H:%M:%S").png && dunstify "Selected screenshot saved"
 
-bindsym $mod+c split h
-bindsym $mod+v split v
+# >> Audio and Backlight
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ #&& dunstify "$(amixer get Master -M | grep -oE -m1 "[[:digit:]]*%")"
+bindsym XF86AudioLowerVolume exec amixer set Master 5%- #&& dunstify "$(amixer get Master -M | grep -oE -m1 "[[:digit:]]*%")"
+bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 5 #&& dunstify "$(xbacklight -get | cut -d '.' -f 1)"
+bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5 #&& dunstify "$(xbacklight -get | cut -d '.' -f 1)"
 
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-bindsym $mod+s layout stacking
 
-bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
+# >> Focus
+
+$super+h focus left
+$super+j focus down
+$super+k focus up
+$super+l focus right
+
+$super+space focus mode_toggle
+
+# >> Moving 
+
+$super+Shift+h move left
+$super+Shift+j move down
+$super+Shift+k move up
+$super+Shift+l move right
+
+# >> Workspace managemant
 
 set $ws1 "1"
 set $ws2 "2"
@@ -50,41 +75,37 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
+$super+1 workspace $ws1
+$super+2 workspace $ws2
+$super+3 workspace $ws3
+$super+4 workspace $ws4
+$super+5 workspace $ws5
+$super+6 workspace $ws6
+$super+7 workspace $ws7
+$super+8 workspace $ws8
+$super+9 workspace $ws9
 
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
+$super+Shift+1 move container to workspace $ws1
+$super+Shift+2 move container to workspace $ws2
+$super+Shift+3 move container to workspace $ws3
+$super+Shift+4 move container to workspace $ws4
+$super+Shift+5 move container to workspace $ws5
+$super+Shift+6 move container to workspace $ws6
+$super+Shift+7 move container to workspace $ws7
+$super+Shift+8 move container to workspace $ws8
+$super+Shift+9 move container to workspace $ws9
 
-bindsym $mod+Shift+s exec poweroff
-bindsym $mod+Shift+y restart
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# >> Windows rules 
 
-bindsym Shift+$mod+r mode "resize"
-bindsym Shift+$mod+f fullscreen
+#class                  border      backgr.     text       split
+client.focused          $blue       $blue      $darkgrey   $green
+client.focused_inactive $darkgrey   $darkgrey  $lightgrey  $darkgrey
+client.unfocused        $darkgrey   $darkgrey  $lightgrey  $darkgrey
+client.urgent           $darkgrey   $darkgrey  $lightgrey  $green
+client.background       $darkgrey 
 
-mode "resize" {
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
 
-        bindsym Escape mode "default"
-}
+# >> Bar
 
 bar {
   position top
@@ -102,34 +123,29 @@ bar {
   }
 }
 
-exec betterlockscreen -l
-exec feh --bg-scale ~/Picture/cyber.jpg
-exec unclutter -idle 5
-exec xidlehook --not-when-fullscreen --not-when-audio --timer normal 180 'betterlockscreen -l' ''
-exec compton --vsync --experimental-backends
+# >> Window manipulation 
 
-bindsym XF86AudioRaiseVolume exec amixer set Master 5+
-bindsym XF86AudioLowerVolume exec amixer set Master 5-
-bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 5
-bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5
+$super+F11 fullscreen
+$super+Shift+space floating toggle 
+$super+e  layout toggle tabbed split 
+$super+c split h
+$super+v split v
 
-bindsym $mod+r exec st -e ranger
-bindsym $mod+i exec idea
-bindsym $mod+g exec steam-runtime
-bindsym $mod+m exec scrot
-bindsym Shift+$mod+m exec "scrot --select"
-bindsym $mod+f exec firefox
-bindsym $mod+a exec betterlockscreen -l
-bindsym $mod+n exec st -e nvim
+# >> Resize
 
-hide_edge_borders smart
-default_border pixel 3
+$super+r mode "resize"
+mode "resize" {
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym j resize grow height 5 px or 5 ppt
+        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
+        bindsym Escape mode "default"
+}
 
-for_window [class="Login_Register_Design-Login_Form"] floating enable
-assign [class="st"] $ws1
-assign [class="firefox"] $ws2
-assign [class="gimp"] $ws3
-assign [class="dota2"] $ws3
-assign [class="Steam"] $ws3
-assign [class="obs"] $ws3
-assign [class="transmission"] $ws3
+# >> Autostart
+
+$exe feh --bg-scale ~/Pictures/Wallpapers/cyber.jpg
+$exe unclutter -idle 5
+$exe xidlehook --not-when-fullscreen --not-when-audio --timer normal 300 'betterlockscreen -l dimblur' ''
+$exe compton --vsync --experimental-backends
+$exe dunst

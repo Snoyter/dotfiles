@@ -1,0 +1,23 @@
+#!/bin/bash
+echo "1 - Plugin"
+echo "2 - Unplug"
+read choice
+
+if [ ! -d "~/Phone" ]
+	then
+	mkdir ~/Phone	
+elif [ -d "~/Phone" ]
+	then
+	if [[ $choice == 1 ]]
+		then
+		simple-mtpfs -l
+		echo "Choose the phone which u want to plugin"
+		read numDevice
+		simple-mtpfs --device $numDevice ~/Phone/
+		echo "Phone plugin"
+	elif [[ $choice == 2 ]]
+		then
+		fusermount -u ~/Phone/
+		echo "Phone unplug"
+	fi
+fi

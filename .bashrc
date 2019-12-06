@@ -4,28 +4,47 @@ HISTSIZE= HISTFILESIZE= # Infinite history
 
 export PS1="\w > \[$(tput sgr0)\]"
 
-alias rm="rm -i"
-alias which="type -all"
-alias ..="cd .."
-
-
 #Config
 alias cfi3="sudo nvim ~/.config/i3/config"
-alias cfsh="sudo nvim ~/.bashrc"
-alias cfvi="sudo nvim ~/.config/nvim/init.vim"
+alias cfsh="sudo nvim ~/.bashrc && source ~/.bashrc"
 
 #System
-alias r="ranger"
-alias sr="sudo ranger $HOME"
-alias n="nvim"
-alias sn="sudo nvim"
-alias c="clear"
-alias p="sudo pacman"
-alias rups="sudo pacman -Rn $(pacman -Qtdq)"
-alias pc="pacman -Qqen | wc -l"
-alias ll="ls -l"
-alias la="ls -al"
-alias mai="make && sudo make install"
+alias Avgust="figlet I Love Avgust | lolcat"
 
-#Internet
-alias yt="youtube-viewer"
+alias c="clear"
+alias cpp="g++ -Wall -o file"
+
+#Packages
+alias p="sudo pacman --noconfirm"
+alias y="yaourt --noconfirm"
+
+alias ll="ls -l"
+
+alias ss="systemctl list-units --type=service"
+alias j="journalctl"
+
+alias h="htop"
+alias sh="sudo htop"
+
+alias r="ranger"
+alias sr="sudo ranger"
+
+alias lynis="lynis audit system"
+alias pep="pacman -Q | grep"
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+	cp="cp -iv" \
+        mv="mv -iv" \
+	rm="rm -v" \
+	mkd="mkdir -pv" \
+	yt="youtube-dl --add-metadata -i" \
+	yta="yt -x -f bestaudio/best" \
+	ffmpeg="ffmpeg -hide_banner" \
+	ka="killall" \
+
+# Colorize commands when possible.
+alias \
+	ls="ls -hN --color=auto --group-directories-first" \
+	grep="grep --color=auto" \
+	diff="diff --color=auto" \
