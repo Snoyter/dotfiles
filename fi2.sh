@@ -1,3 +1,4 @@
+#!/bin/bash
 ln -sf /usr/share/zoneinfo/Asia/Novosibirsk /etc/localtime
 hwclock --systohc
 
@@ -33,6 +34,8 @@ echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
 
 echo '[multilib]' >> /etc/pacman.conf
 echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
+
+pacman -Syy
 
 pacman -S xorg-server xorg-drivers xorg-xinit --noconfirm 
 pacman -S ttf-hack --noconfirm 

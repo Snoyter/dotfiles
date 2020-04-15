@@ -57,6 +57,10 @@ pacman -Sy reflector --noconfirm
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 reflector -c "RU" -f 12 -l 10 -n 12 --save /etc/pacman.d/mirrorlist
 
+echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen 
+locale-gen
+
 pacstrap /mnt base  --noconfirm 
 
 #base-devel linux linux-firmware neovim netctl
