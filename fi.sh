@@ -29,7 +29,7 @@ echo 'Разбиваем диск'
   echo;
   echo;
   echo;
-  echo +8G;
+  echo +20G;
 
   echo n;
   echo;
