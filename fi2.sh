@@ -17,10 +17,6 @@ echo '127.0.1.1	navi.localdomain navi' >> /etc/hosts
 
 #mkinitcpio -p linux
 
-passwd
-
-#The end of the main tasks
-
 pacman -S grub --noconfirm 
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -30,7 +26,7 @@ pacman -S dialog wpa_supplicant --noconfirm
 useradd -m -g users -G wheel -s /bin/bash snoyter
 
 echo 'Пароль для пользователя'
-
+passwd
 passwd snoyter
 
 echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers
@@ -44,12 +40,9 @@ pacman -S networkmanager network-manager-applet ppp --noconfirm
 
 systemctl enable NetworkManager
 
-# >> Установка программ
-
 pacman -S i3-wm ranger
 
 exit
-reboot
 
 #conky htop git pulseaudio picom mplayer 
 #git clone https://github.com/snoyter/dotfiles

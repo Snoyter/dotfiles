@@ -63,4 +63,4 @@ pacstrap /mnt base  --noconfirm
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-arch-chroot /mnt sh -c fi2.sh
+arch-chroot /mnt
