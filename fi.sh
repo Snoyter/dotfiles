@@ -156,6 +156,6 @@ reboot
 #cp dotfiles/.xinitrc ~ 
 #cp dotfiles/.gitconfig
 
-echo "[Service]" > /etc/systemd/system/getty@tty1.service.d/override.conf
-echo "ExecStart=" >> /etc/systemd/system/getty@tty1.service.d/override.conf
-echo "ExecStart=-/usr/bin/agetty --autologin snoyter --noclear %I $TERM" >> /etc/systemd/system/getty@tty1.service.d/override.conf
+#echo "[Service]" > /etc/systemd/system/getty@tty1.service.d/override.conf
+#echo "ExecStart=" >> /etc/systemd/system/getty@tty1.service.d/override.conf
+#echo "ExecStart=-/usr/bin/agetty --autologin snoyter --noclear %I $TERM" >> /etc/systemd/system/getty@tty1.service.d/override.conf
