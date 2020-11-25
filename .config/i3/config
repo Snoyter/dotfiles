@@ -1,3 +1,5 @@
+# i3 config file (v4)
+
 # >> Initialization
 
 font pango:Hack 10
@@ -8,7 +10,6 @@ default_border pixel 3
 
 set $super bindsym Mod4
 set $exe exec --no-startup-id 
-set $fyra exec --no-startup-id i3fyra 
 
 set $rose #5294e2 
 set $lightgrey #C0C0C0
@@ -19,33 +20,15 @@ set $blue #5294e2
 # >> Panic
 
 $super+Shift+q kill
-$super+Shift+s exec poweroff
-$super+Shift+r restart
-$super+Shift+e exec --no-startup-id \
-  "i3-nagbar -t warning -m 'You pressed the exit\
- shortcut. Do you really want to exit i3? This\
- will end your X session.' -b 'Yes, exit i3'\
-  'i3-msg exit'"
-
-# >> Program laungching 
-
-$super+Return exec st
-$super+g exec steam
-$super+f exec firefox
-$super+Shift+f exec firefox --private-window
-$super+i exec idea
-$super+d exec rofi -show drun
-$super+Shift+d exec dmenu_run
-$super+a exec betterlockscreen -l dimblur
-$super+m exec maim -u ~/Pictures/Screenshots/$(date +"%d-%m-%Y|%H:%M:%S").png && dunstify "Fullscreen screenshot saved"
-$super+Shift+m exec maim -s -u ~/Pictures/Screenshots/$(date +"%d-%m-%Y|%H:%M:%S").png && dunstify "Selected screenshot saved"
+# $super+Shift+r restart
+$super+Shift+r reload
 
 # >> Audio and Backlight
-bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ #&& dunstify "$(amixer get Master -M | grep -oE -m1 "[[:digit:]]*%")"
-bindsym XF86AudioLowerVolume exec amixer set Master 5%- #&& dunstify "$(amixer get Master -M | grep -oE -m1 "[[:digit:]]*%")"
-bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 5 #&& dunstify "$(xbacklight -get | cut -d '.' -f 1)"
-bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5 #&& dunstify "$(xbacklight -get | cut -d '.' -f 1)"
-
+bindsym XF86AudioMute exec pamixer -t
+bindsym XF86AudioRaiseVolume exec pamixer -i 5
+bindsym XF86AudioLowerVolume exec pamixer -d 5
+bindsym XF86MonBrightnessUp exec xbacklight +5%
+bindsym XF86MonBrightnessDown exec xbacklight -5%
 
 # >> Focus
 
@@ -53,6 +36,8 @@ $super+h focus left
 $super+j focus down
 $super+k focus up
 $super+l focus right
+
+bindsym Mod1+Tab focus next
 
 $super+space focus mode_toggle
 
@@ -70,30 +55,19 @@ set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
 
 $super+1 workspace $ws1
 $super+2 workspace $ws2
 $super+3 workspace $ws3
 $super+4 workspace $ws4
 $super+5 workspace $ws5
-$super+6 workspace $ws6
-$super+7 workspace $ws7
-$super+8 workspace $ws8
-$super+9 workspace $ws9
 
 $super+Shift+1 move container to workspace $ws1
 $super+Shift+2 move container to workspace $ws2
 $super+Shift+3 move container to workspace $ws3
 $super+Shift+4 move container to workspace $ws4
 $super+Shift+5 move container to workspace $ws5
-$super+Shift+6 move container to workspace $ws6
-$super+Shift+7 move container to workspace $ws7
-$super+Shift+8 move container to workspace $ws8
-$super+Shift+9 move container to workspace $ws9
+
 
 # >> Windows rules 
 
@@ -104,48 +78,41 @@ client.unfocused        $darkgrey   $darkgrey  $lightgrey  $darkgrey
 client.urgent           $darkgrey   $darkgrey  $lightgrey  $green
 client.background       $darkgrey 
 
-
 # >> Bar
 
 bar {
   position top
-  status_command conky -c ~/.config/conky/.conkyrc
+  status_command conky -c ~/.config/conky/conky.conf
 
   colors  {
     background $darkgrey 
     statusline $lightgrey
 
-    #class             border     backgr.  text  
     focused_workspace  $darkgrey  $darkgrey $rose
-    active_workspace   $darkgrey  $darkgrey $lightgrey
     inactive_workspace $darkgrey  $darkgrey $lightgrey
-    urgent_workspace   $darkgrey  $darkgrey $lightgrey
-  }
+ }
 }
 
 # >> Window manipulation 
 
-$super+F11 fullscreen
-$super+Shift+space floating toggle 
-$super+e  layout toggle tabbed split 
 $super+c split h
 $super+v split v
 
-# >> Resize
-
-$super+r mode "resize"
-mode "resize" {
-        bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize grow height 5 px or 5 ppt
-        bindsym k resize shrink height 5 px or 5 ppt
-        bindsym l resize grow width 5 px or 5 ppt
-        bindsym Escape mode "default"
-}
+# $super+Shift+f fullscreen
+$super+Shift+space floating toggle 
+$super+e layout toggle tabbed split
 
 # >> Autostart
 
-$exe feh --bg-scale ~/Pictures/Wallpapers/cyber.jpg
+$exe feh --bg-scale ~/02_Wallpaper/catAndBoy.jpg
 $exe unclutter -idle 5
 $exe xidlehook --not-when-fullscreen --not-when-audio --timer normal 300 'betterlockscreen -l dimblur' ''
-$exe compton --vsync --experimental-backends
-$exe dunst
+$exe picom --config ~/.config/picom/picom.conf
+
+# >> Program laungching 
+
+$super+Return exec st
+$super+f exec firefox
+$super+a exec betterlockscreen -l
+$super+Shift+s exec maim -s -u | xclip -selection clipboard -target image/png
+

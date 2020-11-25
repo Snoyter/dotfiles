@@ -1,0 +1,89 @@
+[options]
+    colorscheme = "gruvbox"
+    colorscheme_bg = "dark"
+    enable_guicolors = false
+    statusline_separator = "nil"
+    statusline_iseparator = "bar"
+    buffer_index_type = 4
+    windows_index_type = 3
+    enable_tabline_filetype_icon = false
+    enable_statusline_mode = false
+    statusline_unicode_symbols = false
+    vimcompatible = true
+    automatic_update = true
+
+[[layers]]
+name = 'autocomplete'
+auto_completion_return_key_behavior = "complete"
+auto_completion_tab_key_behavior = "smart"
+
+[[layers]]
+name = 'shell'
+default_position = 'top'
+default_height = 30
+
+[[layers]]
+  name = "lang#lisp"
+
+[[layers]]
+  name = "lang#C"
+
+[[layers]]
+  name = "lang#java"
+  java_formatter_jar = "/home/snoyter/03_Projects/Java/JavaCore/google-java-format-1.9.jar"
+
+[[layers]]
+  name = "lang#nim"
+
+[[layers]]
+  name = "lang#rust"
+
+[[layers]]
+  name = "lang#python"
+
+[[layers]]
+  name = "lang#lua"
+
+[[layers]]
+  name = "lang#sh"
+
+[[layers]]
+  name = "lang#markdown"
+
+[[layers]]
+  name = "lang#dockerfile"
+
+[[layers]]
+  name = "lang#html"
+
+[[layers]]
+  name = "lang#vim"
+
+[[layers]]
+  name = "lang#toml"
+
+[[layers]]
+  name = "lang#xml"
+
+[[layers]]
+name = "lsp"
+filetype = [
+  "java"
+]
+[layers.override_cmd]
+  java = [
+    "java",
+    "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+    "-Dosgi.bundles.defaultStartLevel=4",
+    "-Declipse.product=org.eclipse.jdt.ls.core.product",
+    "-Dlog.protocol=true",
+    "-Dlog.level=NONE",
+    "-noverify",
+    "-Xmx1G",
+    "-jar",
+    "/home/snoyter/.lsp/eclipse.jdt.ls/plugins/org.eclipse.equinox.launcher_1.6.0.v20200915-1508.jar",
+    "-configuration",
+    "/home/snoyter/.lsp/eclipse.jdt.ls/config_linux",
+    "-data",
+    "/home/snoyter/.cache/javalsp"
+  ]
