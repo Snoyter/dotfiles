@@ -1,15 +1,3 @@
 [user]
-	name = snoyter
 	email = snoyter@mail.ru
-[core]
-	editor = nvim
-[alias]
-	st = status
-	ch = checkout
-	br = branch
-	mg = merge
-	cm = commit
-	reb = rebase
-	lg = log --pretty=format:'%h - %ar:%s'
-  al = add .
-  df = diff
+	name = snoyter

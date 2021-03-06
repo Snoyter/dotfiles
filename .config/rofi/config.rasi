@@ -1,0 +1,15 @@
+configuration {
+	modi: "drun";
+	width: 450;
+	lines: 10;
+	font: "Hack 10";
+	bw: 0;
+	padding: 25;
+	show-icons: true;
+	eh: 1;
+	line-margin: 5;
+	hide-scrollbar: true;
+	color-normal: "argb:00171717, #a4a4a4, argb:00535c5c, argb:00171717, #535c5c";
+	color-urgent: "argb:00171717, #cc6666, argb:e54b5160, argb:00171717, #535c5c";
+	color-window: "argb:f2171717, #535c5c, #a4a4a4";
+}
